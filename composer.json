@@ -28,7 +28,7 @@
 		"zendframework/zend-stdlib" : "~2.1",
 		"doctrine/doctrine-orm-module" : "*",
 		"zf-commons/zfc-base" : "0.*",
-		"adfab/core" : "0.*"
+		"playground/core" : "dev-master"
     },
     "require-dev" : {
 		"phpunit/phpunit" : "3.7.*"
