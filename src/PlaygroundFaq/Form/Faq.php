@@ -72,7 +72,6 @@ class Faq extends ProvidesEventsForm
 
         $submitElement = new Element\Button('submit');
         $submitElement
-            ->setLabel('Edit')
             ->setAttributes(array(
                 'type'  => 'submit',
             ));

@@ -38,7 +38,6 @@ class AdminController extends AbstractActionController
     public function createAction()
     {
         $form = $this->getServiceLocator()->get('playgroundfaq_faq_form');
-        $form->get('submit')->setLabel('Créer');
         $form->setAttribute('action', $this->url()->fromRoute('admin/playgroundfaq_admin/create', array('faqId' => 0)));
         $form->setAttribute('method', 'post');
 
