@@ -59,14 +59,14 @@ class Faq implements InputFilterAwareInterface
     /** @PrePersist */
     public function createChrono()
     {
-        $this->createdAt = new \DateTime("now");
-        $this->updatedAt = new \DateTime("now");
+        $this->setCreatedAt(new \DateTime("now"));
+        $this->setUpdatedAt(new \DateTime("now"));
     }
 
     /** @PreUpdate */
     public function updateChrono()
     {
-        $this->updatedAt = new \DateTime("now");
+        $this->setUpdatedAt(new \DateTime("now"));
     }
 
     /**
