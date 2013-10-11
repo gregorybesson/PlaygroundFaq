@@ -48,8 +48,7 @@ class Faq extends EventProvider implements ServiceManagerAwareInterface
         if (!$form->isValid()) {
             return false;
         }
-
-        return$this->getFaqMapper()->update($faq);
+        return $this->getFaqMapper()->update($faq);
 
     }
 
@@ -109,7 +108,7 @@ class Faq extends EventProvider implements ServiceManagerAwareInterface
      * @param  FaqMapperInterface $faqMapper
      * @return Faq
      */
-    public function setFaqMapper(FaqMapperInterface $faqMapper)
+    public function setFaqMapper($faqMapper)
     {
         $this->faqMapper = $faqMapper;
 
