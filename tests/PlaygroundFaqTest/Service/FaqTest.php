@@ -24,110 +24,194 @@ class FaqTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
     }
 
-   
-    public function testGetActiveFaqs() 
+    public function testCreateFalse() 
     {
+        $sm =  Bootstrap::getServiceManager();
+        $sm->setAllowOverride(true);
+        $service = $sm->get('playgroundfaq_faq_service');
 
-        $faqt1 = new FaqEntity;
-        $faqt1->setQuestion('Test ?');
-        $faqt1->setAnswer("answer");
-        $faqt1->setIsActive(true);
-        $faqt1->setPosition(1);
-        $this->getFaqMapper()->insert($faqt1);
+        $form = $this->getMockBuilder('PlaygroundFaq\Form\Faq')
+            ->setMethods(array('setHydrator', 'bind', 'setData', 'isValid'))
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $faqt2 = new FaqEntity;
-        $faqt2->setQuestion('Test2 ?');
-        $faqt2->setAnswer("answer2");
-        $faqt2->setIsActive(true);
-        $faqt2->setPosition(2);
-        $this->getFaqMapper()->insert($faqt2);
+        $sm->setService('playgroundfaq_faq_form', $form);
 
-        $faqt3 = new FaqEntity;
-        $faqt3->setQuestion('Test3 ?');
-        $faqt3->setAnswer("answer3");
-        $faqt3->setIsActive(false);
-        $faqt3->setPosition(3);
-        $this->getFaqMapper()->insert($faqt3);
-        
-        $faqs = $this->getFaqService()->getActiveFaqs();
-        $this->assertEquals(2, sizeof($faqs));
-        $this->clean();
+        $form->expects($this->any())
+            ->method('isValid')
+            ->will($this->returnValue(false));
+
+        $this->assertFalse($service->create(array("title" => "hello"), new FaqEntity));
+
     }
 
+    public function testCreateTrue() 
+    {
+        $sm =  Bootstrap::getServiceManager();
+        $sm->setAllowOverride(true);
+        $service = $sm->get('playgroundfaq_faq_service');
+
+        $responseTest = true;
+
+        $mapper = $this->getMockBuilder('PlaygroundFaq\Mapper\Faq')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $sm->setService('playgroundfaq_faq_mapper', $mapper);
+
+        $mapper->expects($this->any())
+            ->method('insert')
+            ->will($this->returnValue($responseTest));
+
+        $form = $this->getMockBuilder('PlaygroundFaq\Form\Faq')
+            ->setMethods(array('setHydrator', 'bind', 'setData', 'isValid'))
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $sm->setService('playgroundfaq_faq_form', $form);
+
+        $form->expects($this->any())
+            ->method('isValid')
+            ->will($this->returnValue(true));
+
+        $this->assertEquals($responseTest, $service->create(array("title" => "hello"), new FaqEntity));
+
+    }
+
+    public function testEditFalse() 
+    {
+        $sm =  Bootstrap::getServiceManager();
+        $sm->setAllowOverride(true);
+        $service = $sm->get('playgroundfaq_faq_service');
+
+        $form = $this->getMockBuilder('PlaygroundFaq\Form\Faq')
+            ->setMethods(array('setHydrator', 'bind', 'setData', 'isValid'))
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $sm->setService('playgroundfaq_faq_form', $form);
+
+        $form->expects($this->any())
+            ->method('isValid')
+            ->will($this->returnValue(false));
+
+        $this->assertFalse($service->edit(array("title" => "hello"), new FaqEntity));
+
+    }
+
+    public function testEditTrue() 
+    {
+        $sm =  Bootstrap::getServiceManager();
+        $sm->setAllowOverride(true);
+        $service = $sm->get('playgroundfaq_faq_service');
+
+        $responseTest = true;
+
+        $mapper = $this->getMockBuilder('PlaygroundFaq\Mapper\Faq')
+            ->setMethods(array('update'))
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mapper->expects($this->any())
+            ->method('update')
+            ->will($this->returnValue($responseTest));
+
+        $form = $this->getMockBuilder('PlaygroundFaq\Form\Faq')
+            ->setMethods(array('setHydrator', 'bind', 'setData', 'isValid'))
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $sm->setService('playgroundfaq_faq_form', $form);
+
+        $service->setFaqMapper($mapper);
+
+        $form->expects($this->any())
+            ->method('isValid')
+            ->will($this->returnValue(true));
+
+        $this->assertEquals($responseTest, $service->edit(array("title" => "hello"), new FaqEntity));
+
+    }
+
+    public function testRemove()
+    {
+        $sm =  Bootstrap::getServiceManager();
+        $sm->setAllowOverride(true);
+        $service = $sm->get('playgroundfaq_faq_service');
+
+        $responseTest = true;
+
+        $mapper = $this->getMockBuilder('PlaygroundFaq\Mapper\Faq')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mapper->expects($this->any())
+            ->method('remove')
+            ->will($this->returnValue($responseTest));
+
+        $service->setFaqMapper($mapper);
+        
+        $this->assertEquals($responseTest, $service->remove(new FaqEntity));
+    }
+
+    /*public function testGetActiveFaqs() 
+    {
+        $sm =  Bootstrap::getServiceManager();
+        $sm->setAllowOverride(true);
+        $service = $sm->get('playgroundfaq_faq_service');
+
+        $responseTest = array();
+
+        $query = $this->getMockBuilder('Doctrine\ORM\Query')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $query->expects($this->any())
+            ->method('getResult')
+            ->will($this->returnValue($responseTest));
+        
+        $entity = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $entity->expects($this->any())
+            ->method('createQuery')
+            ->will($this->returnValue($query));
+
+        $sm->setService('playgroundfaq_doctrine_em', $entity);
+
+        $response = $service->getAllFaqs();
+
+        $this->assertEquals($responseTest, $response);
+    }
 
     public function testGetAllFaqs() 
     {
+        $sm =  Bootstrap::getServiceManager();
+        $sm->setAllowOverride(true);
+        $service = $sm->get('playgroundfaq_faq_service');
+
+        $responseTest = array();
+
+        $query = $this->getMockBuilder('Doctrine\ORM\Query')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $query->expects($this->any())
+            ->method('getResult')
+            ->will($this->returnValue($responseTest));
         
-        $faqaf = new FaqEntity;
-        $faqaf->setQuestion('Testfaqaf ?');
-        $faqaf->setAnswer("answerfaqaf");
-        $faqaf->setIsActive(true);
-        $faqaf->setPosition(1);
-        $this->getFaqMapper()->insert($faqaf);
+        $entity = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $entity->expects($this->any())
+            ->method('createQuery')
+            ->will($this->returnValue($query));
 
-        $faqaf = new FaqEntity;
-        $faqaf->setQuestion('Testfaqaf2 ?');
-        $faqaf->setAnswer("answerfaqaf2");
-        $faqaf->setIsActive(true);
-        $faqaf->setPosition(2);
-        $this->getFaqMapper()->insert($faqaf);
+        $sm->setService('playgroundfaq_doctrine_em', $entity);
 
-        $faq3 = new FaqEntity;
-        $faq3->setQuestion('Test3 ?');
-        $faq3->setAnswer("answer3");
-        $faq3->setIsActive(true);
-        $faq3->setPosition(3);
-        $this->getFaqMapper()->insert($faq3);
+        $response = $service->getAllFaqs();
 
-        $faq4 = new FaqEntity;
-        $faq4->setQuestion('Test4 ?');
-        $faq4->setAnswer("answer4");
-        $faq4->setIsActive(true);
-        $faq4->setPosition(4);
-        $this->getFaqMapper()->insert($faq4);
+        $this->assertEquals($responseTest, $response);
+    }*/
 
-
-        $faqs = $this->getFaqMapper()->findAll();
-        $this->assertEquals(4, sizeof($faqs));
-
-        $faqs = $this->getFaqService()->getAllFaqs();
-        $this->assertEquals(4, sizeof($faqs));
-        $this->assertEquals(1, $faqs[0]->getPosition());
-        $this->assertEquals(2, $faqs[1]->getPosition());
-        $this->assertEquals(3, $faqs[2]->getPosition());
-        $this->assertEquals(4, $faqs[3]->getPosition());
-        $this->clean();
-
-    }
-  
-    public function clean()
-    {
-        foreach ($this->getFaqMapper()->findAll() as $faq) {
-            $this->getFaqMapper()->remove($faq);
-        }
-    }
-       
-    public function getFaqMapper()
-    {
-
-        if (null === $this->faqMapper) {
-            $sm = Bootstrap::getServiceManager();
-            $this->faqMapper = $sm->get('playgroundfaq_faq_mapper');
-        }
-
-        return $this->faqMapper;
-    }
-
-
-    public function getFaqService()
-    {
-       if (null === $this->faqService) {
-            $sm = Bootstrap::getServiceManager();
-            $this->faqService = $sm->get('playgroundfaq_faq_service');
-        }
-
-        return $this->faqService;
-    }
 
 
 }
