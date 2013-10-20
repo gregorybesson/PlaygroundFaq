@@ -26,8 +26,6 @@
 		"zendframework/zend-servicemanager" : "~2.1",
 		"zendframework/zend-modulemanager" : "~2.1",
 		"zendframework/zend-stdlib" : "~2.1",
-		"doctrine/doctrine-orm-module" : "*",
-		"zf-commons/zfc-base" : "0.*",
 		"playground/core" : "dev-master"
     },
     "require-dev" : {
