@@ -140,5 +140,13 @@ class ThemeTest extends \PHPUnit_Framework_TestCase
         return $this->faqMapper;
     }
 
+    public function tearDown()
+    {
+        $dbh = $this->em->getConnection();
+        unset($this->sm);
+        unset($this->em);
+        parent::tearDown();
+    }
+
 
 }

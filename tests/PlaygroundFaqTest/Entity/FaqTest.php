@@ -3,7 +3,7 @@
 namespace PlaygroundFaqTest\Entity;
 
 use PlaygroundFaqTest\Bootstrap;
-use \PlaygroundFaq\Entity\Faq as FaqEntity;
+use PlaygroundFaq\Entity\Faq as FaqEntity;
 
 class FaqTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,6 +11,7 @@ class FaqTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+
         $this->sm = Bootstrap::getServiceManager();
         $this->em = $this->sm->get('doctrine.entitymanager.orm_default');
         $tool = new \Doctrine\ORM\Tools\SchemaTool($this->em);
@@ -70,5 +71,13 @@ class FaqTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($faq->getAnswer());
         $this->assertEquals(0, $faq->getIsActive());
         $this->assertEquals(0, $faq->getPosition());
+    }
+
+    public function tearDown()
+    {
+        $dbh = $this->em->getConnection();
+        unset($this->sm);
+        unset($this->em);
+        parent::tearDown();
     }
 }
