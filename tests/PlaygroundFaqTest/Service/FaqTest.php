@@ -213,5 +213,13 @@ class FaqTest extends \PHPUnit_Framework_TestCase
     }*/
 
 
+    public function tearDown()
+    {
+        $dbh = $this->em->getConnection();
+        unset($this->sm);
+        unset($this->em);
+        parent::tearDown();
+    }
+
 
 }
