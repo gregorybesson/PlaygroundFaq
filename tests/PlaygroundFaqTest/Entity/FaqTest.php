@@ -32,11 +32,11 @@ class FaqTest extends \PHPUnit_Framework_TestCase
     public function testSetId()
     {
     	$faq = new FaqEntity();
-        $faq->setQuestion('Test ?');
-        $faq->setAnswer("answer");
-        $faq->setIsActive(true);
-        $faq->setPosition(1);
-        $faq->setId(3);
+        $faq->setQuestion('Test ?')
+            ->setAnswer("answer")
+            ->setIsActive(true)
+            ->setPosition(1)
+            ->setId(3);
         $this->assertEquals(3, $faq->getId());
         $faq->setId(8);
         $this->assertEquals(8, $faq->getId());
