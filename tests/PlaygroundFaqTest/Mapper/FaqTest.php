@@ -26,10 +26,10 @@ class ThemeTest extends \PHPUnit_Framework_TestCase
     public function testInsert()
     {
         $faq = new FaqEntity();
-        $faq->setQuestion('Test ?');
-        $faq->setAnswer("answer");
-        $faq->setIsActive(true);
-        $faq->setPosition(1);
+        $faq->setQuestion('Test ?')
+            ->setAnswer("answer")
+            ->setIsActive(true)
+            ->setPosition(1);
         $faq = $this->getFaqMapper()->insert($faq);
         $this->assertEquals('Test ?', $faq->getQuestion());
     }
@@ -37,10 +37,10 @@ class ThemeTest extends \PHPUnit_Framework_TestCase
     public function testUpdate()
     {
         $faq = new FaqEntity();
-        $faq->setQuestion('Test ?');
-        $faq->setAnswer("answer");
-        $faq->setIsActive(true);
-        $faq->setPosition(1);
+        $faq->setQuestion('Test ?')
+            ->setAnswer("answer")
+            ->setIsActive(true)
+            ->setPosition(1);
         $faq = $this->getFaqMapper()->insert($faq);
         $this->assertEquals('Test ?', $faq->getQuestion());
 
@@ -54,10 +54,10 @@ class ThemeTest extends \PHPUnit_Framework_TestCase
     public function testFindAll()
     {
         $faq = new FaqEntity();
-        $faq->setQuestion('Test ?');
-        $faq->setAnswer("answer");
-        $faq->setIsActive(true);
-        $faq->setPosition(1);
+        $faq->setQuestion('Test ?')
+            ->setAnswer("answer")
+            ->setIsActive(true)
+            ->setPosition(1);
         $faq = $this->getFaqMapper()->insert($faq);
 
         $faqs = $this->getFaqMapper()->findAll();
@@ -65,10 +65,10 @@ class ThemeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("1", sizeof($faqs));
 
         $faq = new FaqEntity();
-        $faq->setQuestion('Test ?');
-        $faq->setAnswer("answer");
-        $faq->setIsActive(true);
-        $faq->setPosition(1);
+        $faq->setQuestion('Test ?')
+            ->setAnswer("answer")
+            ->setIsActive(true)
+            ->setPosition(1);
         $faq = $this->getFaqMapper()->insert($faq);
 
         $faqs = $this->getFaqMapper()->findAll();
@@ -79,10 +79,10 @@ class ThemeTest extends \PHPUnit_Framework_TestCase
     public function testFindById()
     {
         $faq = new FaqEntity();
-        $faq->setQuestion('Test ?');
-        $faq->setAnswer("answer");
-        $faq->setIsActive(true);
-        $faq->setPosition(1);
+        $faq->setQuestion('Test ?')
+            ->setAnswer("answer")
+            ->setIsActive(true)
+            ->setPosition(1);
         $faq = $this->getFaqMapper()->insert($faq); 
 
         $faq2 = $this->getFaqMapper()->findById($faq->getId());
@@ -95,10 +95,10 @@ class ThemeTest extends \PHPUnit_Framework_TestCase
     public function testFindBy()
     {
         $faq = new FaqEntity();
-        $faq->setQuestion('Test ?');
-        $faq->setAnswer("answer");
-        $faq->setIsActive(true);
-        $faq->setPosition(1);
+        $faq->setQuestion('Test ?')
+            ->setAnswer("answer")
+            ->setIsActive(true)
+            ->setPosition(1);
         $faq = $this->getFaqMapper()->insert($faq); 
 
         $faq2 = $this->getFaqMapper()->findBy(array('answer' =>'answer'));
@@ -111,10 +111,10 @@ class ThemeTest extends \PHPUnit_Framework_TestCase
     public function testRemove()
     {
         $faq = new FaqEntity();
-        $faq->setQuestion('Test ?');
-        $faq->setAnswer("answer");
-        $faq->setIsActive(true);
-        $faq->setPosition(1);
+        $faq->setQuestion('Test ?')
+            ->setAnswer("answer")
+            ->setIsActive(true)
+            ->setPosition(1);
         $faq = $this->getFaqMapper()->insert($faq);
 
         $faqs = $this->getFaqMapper()->findAll();
