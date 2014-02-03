@@ -10,14 +10,24 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
  * @ORM\Entity @HasLifecycleCallbacks
  * @ORM\Table(name="faq")
+ * @Gedmo\TranslationEntity(class="PlaygroundFaq\Entity\FaqTranslation")
  */
-class Faq implements InputFilterAwareInterface
+class Faq implements InputFilterAwareInterface, Translatable
 {
     protected $inputFilter;
+
+    protected $locale;
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+    }
 
     /**
      * @ORM\Id
@@ -27,16 +37,19 @@ class Faq implements InputFilterAwareInterface
     protected $id;
 
     /**
+     * @Gedmo\Translatable
      * @ORM\Column(type="text", nullable=false)
      */
     protected $question;
 
     /**
+     * @Gedmo\Translatable
      * @ORM\Column(type="text", nullable=true)
      */
     protected $answer;
 
     /**
+     * @Gedmo\Translatable
      * @ORM\Column(name="is_active", type="boolean")
      */
     protected $isActive = 0;
