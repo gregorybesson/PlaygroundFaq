@@ -35,32 +35,18 @@ return array(
 
     'router' => array(
         'routes' => array(
-        	'frontend' => array(
-       			'child_routes' => array(
-		            'faq' => array(
-		                'type' => 'Zend\Mvc\Router\Http\Segment',
-		                'options' => array(
-		                    'route'    => 'faq',
-		                    'defaults' => array(
-		                        'controller' => 'playgroundfaq',
-		                        'action'     => 'index',
-		                    ),
-		                ),
-		            ),
-       			),
-        	),
             'admin' => array(
                 'child_routes' => array(
                     'playgroundfaq_admin' => array(
                         'type' => 'Literal',
-                        'priority' => 1000,
                         'options' => array(
                             'route' => '/faq',
                             'defaults' => array(
                                 'controller' => 'playgroundfaq_admin',
-                                'action'     => 'index',
+                                'action'     => 'list',
                             ),
                         ),
+                        'may_terminate' => true,
                         'child_routes' =>array(
                             'list' => array(
                                 'type' => 'Segment',
@@ -104,6 +90,20 @@ return array(
                                         'faqId'     => 0
                                     ),
                                 ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            'frontend' => array(
+                'child_routes' => array(
+                    'faq' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route'    => 'faq',
+                            'defaults' => array(
+                                'controller' => 'playgroundfaq',
+                                'action'     => 'index',
                             ),
                         ),
                     ),
