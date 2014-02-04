@@ -33,7 +33,7 @@ class Faq extends ProvidesEventsForm
                     '0' => $translator->translate('No', 'playgroundfaq'),
                     '1' => $translator->translate('Yes', 'playgroundfaq')
                 ),
-                'label' => $translator->translate('Actif', 'playgroundfaq')
+                'label' => $translator->translate('Active', 'playgroundfaq')
             )
         ));
 
