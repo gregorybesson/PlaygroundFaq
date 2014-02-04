@@ -147,13 +147,13 @@ return array(
                 'privilege' => 'list',
                 'pages' => array(
                     'list' => array(
-                        'label' => 'Liste des FAQ',
+                        'label' => 'FAQ list',
                         'route' => 'admin/playgroundfaq_admin/list',
                         'resource' => 'faq',
                         'privilege' => 'list',
                     ),
                     'create' => array(
-                        'label' => 'Nouvelle FAQ',
+                        'label' => 'New FAQ',
                         'route' => 'admin/playgroundfaq_admin/create',
                         'resource' => 'faq',
                         'privilege' => 'add',
