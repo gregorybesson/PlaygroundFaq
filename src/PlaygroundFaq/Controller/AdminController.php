@@ -31,7 +31,7 @@ class AdminController extends AbstractActionController
     public function createAction()
     {
         $form = $this->getServiceLocator()->get('playgroundfaq_faq_form');
-        $form->setAttribute('action', $this->url()->fromRoute('admin/playgroundfaq_admin/create', array('faqId' => 0)));
+        $form->setAttribute('action', $this->url()->fromRoute('admin/faq/create', array('faqId' => 0)));
         $form->setAttribute('method', 'post');
 
         $faq = new \PlaygroundFaq\Entity\Faq();
@@ -45,7 +45,7 @@ class AdminController extends AbstractActionController
             if ($faq) {
                 $this->flashMessenger()->setNamespace('playgroundfaq')->addMessage('La FAQ a été créée');
 
-                return $this->redirect()->toRoute('admin/playgroundfaq_admin/list');
+                return $this->redirect()->toRoute('admin/faq/list');
             }
         }
 
@@ -60,7 +60,7 @@ class AdminController extends AbstractActionController
         $faqId = $this->getEvent()->getRouteMatch()->getParam('faqId');
         $faq = $this->getFaqMapper()->findById($faqId);
         $form = $this->getServiceLocator()->get('playgroundfaq_faq_form');
-        $form->setAttribute('action', $this->url()->fromRoute('admin/playgroundfaq_admin/edit', array('faqId' => $faqId)));
+        $form->setAttribute('action', $this->url()->fromRoute('admin/faq/edit', array('faqId' => $faqId)));
         $form->setAttribute('method', 'post');
 
         $form->bind($faq);
@@ -72,7 +72,7 @@ class AdminController extends AbstractActionController
             if ($faq) {
                 $this->flashMessenger()->setNamespace('playgroundfaq')->addMessage('La FAQ a été créée');
 
-                return $this->redirect()->toRoute('admin/playgroundfaq_admin/list');
+                return $this->redirect()->toRoute('admin/faq/list');
             }
         }
 
@@ -91,7 +91,7 @@ class AdminController extends AbstractActionController
             $this->flashMessenger()->setNamespace('playgroundfaq')->addMessage('FAQ supprimée');
         }
 
-        return $this->redirect()->toRoute('admin/playgroundfaq_admin/list');
+        return $this->redirect()->toRoute('admin/faq/list');
     }
 
     public function setOptions(ModuleOptions $options)

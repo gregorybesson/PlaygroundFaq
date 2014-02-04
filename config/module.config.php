@@ -1,5 +1,4 @@
 <?php
-
 return array(
     'doctrine' => array(
         'driver' => array(
@@ -8,33 +7,39 @@ return array(
                 'cache' => 'array',
                 'paths' => __DIR__ . '/../src/PlaygroundFaq/Entity'
             ),
-
             'orm_default' => array(
                 'drivers' => array(
-                    'PlaygroundFaq\Entity'  => 'playgroundfaq_entity'
+                    'PlaygroundFaq\Entity' => 'playgroundfaq_entity'
                 )
             )
         )
     ),
-
     'view_manager' => array(
-        'template_map' => array(
-        ),
+        'template_map' => array(),
         'template_path_stack' => array(
-            __DIR__ . '/../view/admin',
-        	__DIR__ . '/../view/frontend',
+             __DIR__ . '/../views/admin',
+             __DIR__ . '/../views/frontend'
         ),
     ),
-
+    'translator' => array(
+        'locale' => 'fr_FR',
+        'translation_file_patterns' => array(
+            array(
+                'type' => 'phpArray',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern' => '%s.php',
+                'text_domain' => 'playgroundfaq'
+            )
+        )
+    ),
     'controllers' => array(
         'invokables' => array(
             'playgroundfaq_admin' => 'PlaygroundFaq\Controller\AdminController',
             'playgroundfaq'       => 'PlaygroundFaq\Controller\IndexController',
         ),
     ),
-
     'router' => array(
-        'routes' => array(
+        'routes' =>array(
             'admin' => array(
                 'child_routes' => array(
                     'playgroundfaq_admin' => array(
@@ -43,7 +48,7 @@ return array(
                             'route' => '/faq',
                             'defaults' => array(
                                 'controller' => 'playgroundfaq_admin',
-                                'action'     => 'list',
+                                'action' => 'list',
                             ),
                         ),
                         'may_terminate' => true,
@@ -112,18 +117,6 @@ return array(
         ),
     ),
 
-    'translator' => array(
-        'locale' => 'fr_FR',
-        'translation_file_patterns' => array(
-            array(
-                'type'         => 'phpArray',
-                'base_dir'     => __DIR__ . '/../language',
-                'pattern'      => '%s.php',
-                'text_domain'  => 'playgroundfaq'
-            ),
-        ),
-    ),
-
     'core_layout' => array(
         'PlaygroundFaq' => array(
             'default_layout' => 'layout/2columns-left',
@@ -154,10 +147,10 @@ return array(
                 'privilege' => 'list',
                 'pages' => array(
                     'list' => array(
-                            'label' => 'Liste des FAQ',
-                            'route' => 'admin/playgroundfaq_admin/list',
-                            'resource' => 'faq',
-                            'privilege' => 'list',
+                        'label' => 'Liste des FAQ',
+                        'route' => 'admin/playgroundfaq_admin/list',
+                        'resource' => 'faq',
+                        'privilege' => 'list',
                     ),
                     'create' => array(
                         'label' => 'Nouvelle FAQ',
