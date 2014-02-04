@@ -4,6 +4,7 @@ namespace PlaygroundFaqTest\Service;
 
 use PlaygroundFaqTest\Bootstrap;
 use \PlaygroundFaq\Entity\Faq as FaqEntity;
+use PlaygroundFaq\Entity\Faq;
 
 class FaqTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +25,7 @@ class FaqTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
     }
 
-    public function testCreateFalse() 
+    public function testCreateFalse()
     {
         $sm =  Bootstrap::getServiceManager();
         $sm->setAllowOverride(true);
@@ -45,7 +46,7 @@ class FaqTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testCreateTrue() 
+    public function testCreateTrue()
     {
         $sm =  Bootstrap::getServiceManager();
         $sm->setAllowOverride(true);
@@ -78,7 +79,7 @@ class FaqTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testEditFalse() 
+    public function testEditFalse()
     {
         $sm =  Bootstrap::getServiceManager();
         $sm->setAllowOverride(true);
@@ -99,7 +100,7 @@ class FaqTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testEditTrue() 
+    public function testEditTrue()
     {
         $sm =  Bootstrap::getServiceManager();
         $sm->setAllowOverride(true);
@@ -150,68 +151,9 @@ class FaqTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($responseTest));
 
         $service->setFaqMapper($mapper);
-        
+
         $this->assertEquals($responseTest, $service->remove(new FaqEntity));
     }
-
-    /*public function testGetActiveFaqs() 
-    {
-        $sm =  Bootstrap::getServiceManager();
-        $sm->setAllowOverride(true);
-        $service = $sm->get('playgroundfaq_faq_service');
-
-        $responseTest = array();
-
-        $query = $this->getMockBuilder('Doctrine\ORM\Query')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $query->expects($this->any())
-            ->method('getResult')
-            ->will($this->returnValue($responseTest));
-        
-        $entity = $this->getMockBuilder('Doctrine\ORM\EntityManager')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $entity->expects($this->any())
-            ->method('createQuery')
-            ->will($this->returnValue($query));
-
-        $sm->setService('playgroundfaq_doctrine_em', $entity);
-
-        $response = $service->getAllFaqs();
-
-        $this->assertEquals($responseTest, $response);
-    }
-
-    public function testGetAllFaqs() 
-    {
-        $sm =  Bootstrap::getServiceManager();
-        $sm->setAllowOverride(true);
-        $service = $sm->get('playgroundfaq_faq_service');
-
-        $responseTest = array();
-
-        $query = $this->getMockBuilder('Doctrine\ORM\Query')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $query->expects($this->any())
-            ->method('getResult')
-            ->will($this->returnValue($responseTest));
-        
-        $entity = $this->getMockBuilder('Doctrine\ORM\EntityManager')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $entity->expects($this->any())
-            ->method('createQuery')
-            ->will($this->returnValue($query));
-
-        $sm->setService('playgroundfaq_doctrine_em', $entity);
-
-        $response = $service->getAllFaqs();
-
-        $this->assertEquals($responseTest, $response);
-    }*/
-
 
     public function tearDown()
     {
