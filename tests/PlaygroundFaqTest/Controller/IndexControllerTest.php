@@ -19,27 +19,24 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     public function testIndexAction()
     {
-//         $serviceManager = $this->getApplicationServiceLocator();
-//         $serviceManager->setAllowOverride(true);
+        $serviceManager = $this->getApplicationServiceLocator();
+        $serviceManager->setAllowOverride(true);
 
-//         $faqService = $this->getMockBuilder('PlaygroundFaq\Service\Faq')
-//         ->setMethods(array('getActiveFaqs'))
-//         ->disableOriginalConstructor()
-//         ->getMock();
+        $faqService = $this->getMockBuilder('PlaygroundFaq\Service\Faq')
+        ->setMethods(array('getActiveFaqs'))
+        ->disableOriginalConstructor()
+        ->getMock();
 
-//         $query = new \Doctrine\ORM\Query();
+        $serviceManager->setService('playgroundfaq_faq_service', $faqService);
 
-//         $serviceManager->setService('playgroundfaq_faq_service', $faqService);
+        $faqService->expects($this->once())
+        ->method('getActiveFaqs')
+        ->will($this->returnValue(array()));
 
-//         $faqService->expects($this->once())
-//         ->method('getActiveFaqs')
-//         ->will($this->returnValue($query));
-
-//         $response = $this->dispatch('/faq');
-//         $this->assertResponseStatusCode(302);
-//         $this->assertModuleName('playgroundfaq');
-//         $this->assertControllerClass('IndexController');
-//         $this->assertActionName('index');
-        $this->assertTrue(true);
+        $response = $this->dispatch('/faq');
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('playgroundfaq');
+        $this->assertControllerClass('IndexController');
+        $this->assertActionName('index');
     }
 }

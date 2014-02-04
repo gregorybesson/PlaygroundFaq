@@ -17,8 +17,8 @@ return array(
     'view_manager' => array(
         'template_map' => array(),
         'template_path_stack' => array(
-             __DIR__ . '/../views/admin',
-             __DIR__ . '/../views/frontend'
+             __DIR__ . '/../view/admin',
+             __DIR__ . '/../view/frontend'
         ),
     ),
     'translator' => array(

@@ -4,6 +4,7 @@ namespace PlaygroundFaqTest\Controller;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use PlaygroundFaq\Entity\Faq;
+use PlaygroundFaqTest\Bootstrap;
 
 class AdminControllerTest extends AbstractHttpControllerTestCase
 {
@@ -20,65 +21,64 @@ class AdminControllerTest extends AbstractHttpControllerTestCase
 
     public function testListAction()
     {
-//         $serviceManager = $this->getApplicationServiceLocator();
-//         $serviceManager->setAllowOverride(true);
+        $serviceManager = $this->getApplicationServiceLocator();
+        $serviceManager->setAllowOverride(true);
 
-//         $faqService = $this->getMockBuilder('PlaygroundFaq\Service\Faq')
-//         ->setMethods(array('getAllFaqs'))
-//         ->disableOriginalConstructor()
-//         ->getMock();
+        $faqService = $this->getMockBuilder('PlaygroundFaq\Service\Faq')
+        ->setMethods(array('getAllFaqs'))
+        ->disableOriginalConstructor()
+        ->getMock();
 
-//         $query = new \Doctrine\ORM\Query();
+        $serviceManager->setService('playgroundfaq_faq_service', $faqService);
 
-//         $serviceManager->setService('playgroundfaq_faq_service', $faqService);
+        $faqService->expects($this->once())
+        ->method('getAllFaqs')
+        ->will($this->returnValue(array()));
 
-//         $faqService->expects($this->once())
-//         ->method('getAllFaqs')
-//         ->will($this->returnValue($query));
-
-//         $response = $this->dispatch('/admin/faq/list');
-//         $this->assertResponseStatusCode(302);
-//         $this->assertModuleName('playgroundfaq');
-//         $this->assertControllerClass('AdminController');
-//         $this->assertActionName('list');
-        $this->assertTrue(true);
+        $response = $this->dispatch('/admin/faq/list');
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('playgroundfaq');
+        $this->assertControllerClass('AdminController');
+        $this->assertActionName('list');
     }
 
     public function testRemoveAction()
     {
-//         $serviceManager = $this->getApplicationServiceLocator();
-//         $serviceManager->setAllowOverride(true);
+        $serviceManager = $this->getApplicationServiceLocator();
+        $serviceManager->setAllowOverride(true);
 
-//         $faqService = $this->getMockBuilder('PlaygroundFaq\Service\Faq')
-//         ->setMethods(array('remove', 'getFaqMapper'))
-//         ->disableOriginalConstructor()
-//         ->getMock();
+        $faqService = $this->getMockBuilder('PlaygroundFaq\Service\Faq')
+        ->setMethods(array('remove'))
+        ->disableOriginalConstructor()
+        ->getMock();
 
-//         $faqMapper = $this->getMockBuilder('PlaygroundFaq\Mapper\Faq')
-//         ->setMethods(array('findById'))
-//         ->disableOriginalConstructor()
-//         ->getMock();
+        $faqMapper = $this->getMockBuilder('PlaygroundFaq\Mapper\Faq')
+        ->setMethods(array('findById'))
+        ->disableOriginalConstructor()
+        ->getMock();
 
-//         $serviceManager->setService('playgroundfaq_faq_service', $faqService);
+        $faqService->setFaqMapper($faqMapper);
+        $serviceManager->setService('playgroundfaq_faq_service', $faqService);
+        $serviceManager->setService('playgroundfaq_faq_mapper', $faqMapper);
 
-//         $faq = new Faq();
+        $faq = new Faq();
+        $faq->setQuestion('qq')
+        ->setAnswer('aa')
+        ->setIsActive(1)
+        ->setPosition(1);
 
-//         $faqService->expects($this->once())
-//         ->method('getFaqMapper')
-//         ->will($this->returnValue($faqMapper));
+        $faqMapper->expects($this->once())
+        ->method('findById')
+        ->will($this->returnValue($faq));
 
-//         $faqService->expects($this->once())
-//         ->method('remove');
+        $faqService->expects($this->once())
+        ->method('remove');
 
-//         $faqMapper->expects($this->once())
-//         ->method('findById')
-//         ->will($this->returnValue($faq));
-
-//         $response = $this->dispatch('/admin/faq/remove/1');
-//         $this->assertResponseStatusCode(302);
-//         $this->assertModuleName('playgroundfaq');
-//         $this->assertControllerClass('AdminController');
-//         $this->assertActionName('remove');
-        $this->assertTrue(true);
+        $response = $this->dispatch('/admin/faq/remove/1');
+        $this->assertResponseStatusCode(302);
+        $this->assertModuleName('playgroundfaq');
+        $this->assertControllerClass('AdminController');
+        $this->assertActionName('remove');
+        $this->assertRedirectTo('/admin/faq/list');
     }
 }
