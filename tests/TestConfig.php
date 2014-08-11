@@ -4,10 +4,8 @@ return array(
         'DoctrineModule',
         'DoctrineORMModule',
         'ZfcBase',
-        'ZfcUser',
         'PlaygroundCore',
         'PlaygroundDesign',
-        'PlaygroundUser',
         'PlaygroundFaq',
     ),
     'module_listener_options' => array(
