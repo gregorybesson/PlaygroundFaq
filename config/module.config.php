@@ -14,6 +14,28 @@ return array(
             )
         )
     ),
+    'bjyauthorize' => array(
+        'resource_providers' => array(
+            'BjyAuthorize\Provider\Resource\Config' => array(
+                'faq'           => array(),
+            ),
+        ),
+    
+        'rule_providers' => array(
+            'BjyAuthorize\Provider\Rule\Config' => array(
+                'allow' => array(
+                    array(array('admin'), 'faq',            array('list','add','edit','delete')),
+                ),
+            ),
+        ),
+    
+        'guards' => array(
+            'BjyAuthorize\Guard\Controller' => array(
+                // Admin area
+                array('controller' => 'playgroundfaq_admin',                                    'roles' => array('admin')),
+            ),
+        ),
+    ),
     'view_manager' => array(
         'template_map' => array(),
         'template_path_stack' => array(
