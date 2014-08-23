@@ -31,8 +31,11 @@ return array(
     
         'guards' => array(
             'BjyAuthorize\Guard\Controller' => array(
+                
+                array('controller' => 'playgroundfaq', 'roles' => array('guest', 'user')),
+                
                 // Admin area
-                array('controller' => 'playgroundfaq_admin',                                    'roles' => array('admin')),
+                array('controller' => 'playgroundfaq_admin', 'roles' => array('admin')),
             ),
         ),
     ),
