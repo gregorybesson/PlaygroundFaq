@@ -5,7 +5,7 @@ namespace PlaygroundFaq\Form;
 use Zend\Form\Form;
 use Zend\Form\Element;
 use ZfcBase\Form\ProvidesEventsForm;
-use Zend\I18n\Translator\Translator;
+use Zend\Mvc\I18n\Translator;
 
 class Faq extends ProvidesEventsForm
 {

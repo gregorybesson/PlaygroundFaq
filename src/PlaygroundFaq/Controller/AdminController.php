@@ -12,14 +12,7 @@ class AdminController extends AbstractActionController
 
     public function listAction()
     {
-        $faqMapper = $this->getFaqMapper();
-
-        $faqService = $this->getAdminFaqService();
-
-        //$faqs = $faqService->getActiveFaqs();
-        //$faqs = $faqMapper->findAll();
-
-        $faqs = $faqService->getAllFaqs();
+        $faqs = $this->getAdminFaqService()->getAllFaqs();
 
         if (is_array($faqs)) {
             $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($faqs));
@@ -30,8 +23,10 @@ class AdminController extends AbstractActionController
         $paginator->setItemCountPerPage(10);
         $paginator->setCurrentPageNumber($this->getEvent()->getRouteMatch()->getParam('p'));
 
-        return array(
-            'faqs' => $paginator,
+        return new ViewModel(
+            array(
+                'faqs' => $paginator,
+            )
         );
     }
 
