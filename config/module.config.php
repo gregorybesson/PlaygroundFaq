@@ -144,10 +144,10 @@ return array(
 
     'core_layout' => array(
         'PlaygroundFaq' => array(
-            'default_layout' => 'layout/2columns-left',
+            'layout' => 'layout/2columns-left',
         	'controllers' => array(
        			'playgroundfaq_admin' => array(
-        			'default_layout' => 'layout/admin',
+        			'layout' => 'layout/admin',
        			),
        		),
         ),
