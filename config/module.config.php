@@ -143,13 +143,17 @@ return array(
     ),
 
     'core_layout' => array(
-        'PlaygroundFaq' => array(
-            'layout' => 'layout/2columns-left',
-        	'controllers' => array(
-       			'playgroundfaq_admin' => array(
-        			'layout' => 'layout/admin',
-       			),
-       		),
+        'frontend' => array(
+            'modules' => array(
+                'PlaygroundFaq' => array(
+                    'layout' => 'layout/2columns-left',
+                	'controllers' => array(
+               			'playgroundfaq_admin' => array(
+                			'layout' => 'layout/admin',
+               			),
+               		),
+                ),
+            ),
         ),
     ),
 
