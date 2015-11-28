@@ -12,6 +12,5 @@ return array(
 	),
     'rss' => array(
         'url' => 'http://www.tf1.fr',
-    ),
-    'channel' => 'test',
+    )
 );
