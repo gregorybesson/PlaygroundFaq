@@ -161,7 +161,7 @@ class ThemeTest extends \PHPUnit_Framework_TestCase
     }
 
 
-     public function getFaqMapper()
+    public function getFaqMapper()
     {
 
         if (null === $this->faqMapper) {
@@ -179,6 +179,4 @@ class ThemeTest extends \PHPUnit_Framework_TestCase
         unset($this->em);
         parent::tearDown();
     }
-
-
 }

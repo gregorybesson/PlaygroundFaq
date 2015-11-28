@@ -23,7 +23,7 @@ class FaqTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateChrono()
     {
-    	$faq = new FaqEntity();
+        $faq = new FaqEntity();
         sleep(2);
         $faq->updateChrono();
         $this->assertNotEquals($faq->getCreatedAt(), $faq->getUpdatedAt());
@@ -31,7 +31,7 @@ class FaqTest extends \PHPUnit_Framework_TestCase
 
     public function testSetId()
     {
-    	$faq = new FaqEntity();
+        $faq = new FaqEntity();
         $faq->setQuestion('Test ?')
             ->setAnswer("answer")
             ->setIsActive(true)
@@ -44,21 +44,21 @@ class FaqTest extends \PHPUnit_Framework_TestCase
 
     public function testGetAnswer()
     {
-    	$faq = new FaqEntity();
+        $faq = new FaqEntity();
         $faq->setAnswer("answer");
         $this->assertEquals("answer", $faq->getAnswer());
     }
 
     public function testGetIsActive()
     {
-    	$faq = new FaqEntity();
+        $faq = new FaqEntity();
         $faq->setIsActive(true);
         $this->assertTrue($faq->getIsActive());
     }
 
     public function testPopulate()
     {
-    	$faq = new FaqEntity();
+        $faq = new FaqEntity();
         $faq->populate(array("question" => "This is a question ?", "answer" => "This is an answer", "isActive" => 1, "position" => 3));
         $this->assertEquals("This is a question ?", $faq->getQuestion());
         $this->assertEquals("This is an answer", $faq->getAnswer());

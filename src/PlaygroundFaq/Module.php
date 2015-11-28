@@ -26,7 +26,7 @@ class Module
             $translate = $serviceManager->get('viewhelpermanager')->get('translate');
             $translate->getTranslator()->setLocale($locale);
         }
-        AbstractValidator::setDefaultTranslator($translator,'playgroundcore');
+        AbstractValidator::setDefaultTranslator($translator, 'playgroundcore');
     }
 
     public function getConfig()
@@ -68,7 +68,7 @@ class Module
                         $sm->get('playgroundfaq_module_options')
                     );
                 },
-                'playgroundfaq_faq_form' => function($sm) {
+                'playgroundfaq_faq_form' => function ($sm) {
                     $translator = $sm->get('translator');
                     $options = $sm->get('playgroundfaq_module_options');
                     $form = new Form\Faq(null, $translator);

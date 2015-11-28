@@ -162,6 +162,4 @@ class FaqTest extends \PHPUnit_Framework_TestCase
         unset($this->em);
         parent::tearDown();
     }
-
-
 }
