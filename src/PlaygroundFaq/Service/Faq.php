@@ -36,7 +36,7 @@ class Faq extends EventProvider implements ServiceManagerAwareInterface
             return false;
         }
 
-       return $this->getFaqMapper()->insert($faq);
+        return $this->getFaqMapper()->insert($faq);
     }
 
     public function edit(array $data, $faq)
